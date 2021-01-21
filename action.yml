@@ -13,6 +13,14 @@ inputs:
     description: arn for statemachine to run 
     default: ''
     required: false 
+  pollInterval: 
+    description: how often to check for success/failure
+    default: '00:01:00'
+    required: false 
+  maxTime: 
+    description: max time to wait for success/failure
+    default: '00:30:00'
+    required: false
 outputs:
   statemachineexecutionarn:
     description: the execution of the statemachine

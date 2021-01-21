@@ -17,10 +17,13 @@ namespace StateMachineGithubAction
             var input = System.Environment.GetEnvironmentVariable("INPUT_PAYLOAD") ??
                         "{}";
 
+            var maxTime = System.Environment.GetEnvironmentVariable("INPUT_MAXTIME") ?? "00:30:00";
+            var pollInterval = System.Environment.GetEnvironmentVariable("INPUT_POLLINTERVAL") ?? "00:01:00";
+
             var rsp = await Run(arn, Guid.NewGuid().ToString(), input);
             try
             {
-                await Wait(rsp.ExecutionArn, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(30));
+                await Wait(rsp.ExecutionArn, TimeSpan.Parse(pollInterval), TimeSpan.Parse(maxTime));
             }
             catch (Exception e)
             {
@@ -56,7 +59,10 @@ namespace StateMachineGithubAction
                     Console.WriteLine(result.Status.Value);
                 if (result.Status == ExecutionStatus.SUCCEEDED)
                     {
-                        return result.Output;
+                    Console.WriteLine("::set-output name=statemachineexecutionarn::" + result.Output);
+                    Console.WriteLine("::set-output name=result::" + result.Output);
+
+                    return result.Output;
                     }
                     else if (result.Status == ExecutionStatus.RUNNING)
                     {
