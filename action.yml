@@ -1,0 +1,24 @@
+name: 'AlliedPayment StepFunction Actions'
+description: 'Launch and Wait for StepFunction'
+author:  'AlliedPayment'
+branding:
+  icon: 'cloud'
+  color: 'purple'
+inputs:
+  payload:
+    description: |
+      JSON payload for step function 
+    default: ''
+    required: false 
+   statemachinearn: 
+    description: arn for statemachine to run 
+    default: ''
+    required: false 
+outputs:
+  statemachineexecutionarn:
+    description: the execution of the statemachine
+  result:
+    description: the end result of the completed statemachine
+runs:
+  using: 'docker'
+  image: './Dockerfile'
