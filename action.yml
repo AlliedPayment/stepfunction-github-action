@@ -6,8 +6,7 @@ branding:
   color: 'purple'
 inputs:
   payload:
-    description: |
-      JSON payload for step function 
+    description: JSON payload for step function 
     default: ''
     required: false 
    statemachinearn: 
