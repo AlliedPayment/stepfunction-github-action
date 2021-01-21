@@ -9,7 +9,7 @@ inputs:
     description: JSON payload for step function 
     default: ''
     required: false 
-   statemachinearn: 
+  statemachinearn: 
     description: arn for statemachine to run 
     default: ''
     required: false 
